@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseSync.UI", "src\RiseSync.UI\RiseSync.UI.csproj", "{54481CE7-42D0-45FD-A033-25BE9C1708B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseSync.Logic", "src\RiseSync.Logic\RiseSync.Logic.csproj", "{CF5FCDB6-487D-4247-AD47-D03615E8C67C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54481CE7-42D0-45FD-A033-25BE9C1708B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54481CE7-42D0-45FD-A033-25BE9C1708B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54481CE7-42D0-45FD-A033-25BE9C1708B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54481CE7-42D0-45FD-A033-25BE9C1708B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5FCDB6-487D-4247-AD47-D03615E8C67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5FCDB6-487D-4247-AD47-D03615E8C67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5FCDB6-487D-4247-AD47-D03615E8C67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5FCDB6-487D-4247-AD47-D03615E8C67C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {441865A5-A4AE-48AB-B448-A9690EC6781C}
+	EndGlobalSection
+EndGlobal
