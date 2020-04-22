@@ -7,7 +7,7 @@ namespace RiseSync.Logic.Services
 {
     public interface ILocalDatabaseService
     {
-        Task<IEnumerable<Supply>> GetAllSupplies(string connectionString);
+        Task<IEnumerable<Supply>> GetAllSupplies(string connectionString, string database);
         bool GetStatusConnectDatabase(string connectionString);
     }
 }

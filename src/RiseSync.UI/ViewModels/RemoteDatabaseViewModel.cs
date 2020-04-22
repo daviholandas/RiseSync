@@ -37,26 +37,6 @@ namespace RiseSync.UI.ViewModels
         #endregion
 
 
-        #region Properties
-        public string Database
-        {
-            get => _remoteDatabase.ConnectionString;
-            set
-            {
-                _remoteDatabase.ConnectionString = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string RemoteconnectionString
-        {
-            get => _remoteDatabase.ConnectionString;
-            set
-            {
-                _remoteDatabase.ConnectionString = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
+       
     }
 }

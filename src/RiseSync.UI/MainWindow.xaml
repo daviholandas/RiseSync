@@ -108,11 +108,11 @@
                         <TextBlock Text="CNPJ do Cliente" FontSize="15"/>
                         <TextBox x:Name="RemoteDatabase" Padding="2" Text="{Binding RemoteDatabase}" />
                         <TextBlock Text="Usuario" FontSize="15"/>
-                        <TextBox x:Name="ConnectionString" Padding="2" 
-                         Text="{Binding RemoteConnectionString}" />
+                        <TextBox x:Name="RemoteUser" Padding="2" 
+                         Text="{Binding RemoteUser}" />
                         <TextBlock Text="Senha" FontSize="15"/>
-                        <TextBox Padding="2" 
-                         Text="{Binding RemoteConnectionString}" />
+                        <TextBox x:Name="RemotePassword" Padding="2" 
+                         Text="{Binding RemotePassword}" />
                         <Button Content="Sicronizar"
                                 HorizontalAlignment="Left"
                                 FontSize="15"
@@ -124,9 +124,18 @@
                         <Label Content="Escolha qual banco remoto: " 
                                FontSize="15" FontWeight="Bold"/>
                         <StackPanel Margin="20 0 0 0">
-                            <RadioButton Content="MongoDB Atlas" />
-                            <RadioButton Content="Mlab"/>
-                            <RadioButton Content="MongoDB local" />
+                            <RadioButton x:Name="MongoAtlas" 
+                                         Content="MongoDB Atlas" 
+                                         GroupName="DbType"
+                                         IsChecked="{Binding RadioBtnCheck, Converter= {local:EnumToBool}, ConverterParameter ={x:Static local:RemoteDbType.MongoAtlas}}"/>
+                            <RadioButton x:Name="Mlab" 
+                                         Content="Mlab" 
+                                         GroupName="DbType"
+                                         IsChecked="{Binding RadioBtnCheck, Converter= {local:EnumToBool}, ConverterParameter ={x:Static local:RemoteDbType.MLab}}"/>
+                            <RadioButton x:Name="MongoLocal" 
+                                         Content="MongoDB local"  
+                                         GroupName="DbType"
+                                         IsChecked="{Binding RadioBtnCheck, Converter= {local:EnumToBool}, ConverterParameter ={x:Static local:RemoteDbType.MongoLocal}}"/> 
                         </StackPanel>
 
                     </StackPanel>

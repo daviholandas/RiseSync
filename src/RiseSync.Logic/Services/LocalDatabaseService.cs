@@ -30,13 +30,13 @@ namespace RiseSync.Logic.Services
             }
         }
 
-        public async Task<IEnumerable<Supply>> GetAllSupplies(string connectionString)
+        public async Task<IEnumerable<Supply>> GetAllSupplies(string connectionString, string database)
         {
             using (var connect = new MySqlConnection(connectionString))
             {
                 await connect.OpenAsync();
                 var supplies = await connect.QueryAsync<Supply>($"SELECT IN_ID, IN_NOM,IN_COD, IN_VALOR,IN_SUBGR," +
-                    $"categoria.SG_NOM as Category FROM restodba.si_insu as insumos inner join restodba.si_s_gru as categoria on insumos.IN_SUBGR = categoria.SG_COD;");
+                    $"categoria.SG_NOM as Category FROM {database}.si_insu as insumos inner join {database}.si_s_gru as categoria on insumos.IN_SUBGR = categoria.SG_COD;");
 
                 return supplies;
 

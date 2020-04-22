@@ -19,6 +19,7 @@ namespace RiseSync.UI.ViewModels
 			Password = ""
 		};
 		private string _items;
+		private RemoteDbType _radioBtnCheck;
 		private RemoteDatabase _remoteDatabase;
 		private ILocalDatabaseService _localDatabaseService;
 		private IRemoteDatabaseService _remoteDatabaseService;
@@ -38,7 +39,6 @@ namespace RiseSync.UI.ViewModels
 
 		#region Commands
 		public RelayCommand ConnectCmd { get; private set; }
-		public RelayCommand SyncCmd { get; private set; }
 		private bool CanConnect()
 		{
 			return true;
@@ -51,7 +51,7 @@ namespace RiseSync.UI.ViewModels
 			if (status)
 			{
 				MessageBox.Show("Banco conectado com sucesso.", "RiseSync", MessageBoxButton.OK, MessageBoxImage.Information);
-				_supplies =(ICollection<Supply>) _localDatabaseService.GetAllSupplies(connectionString).Result;
+				_supplies =(ICollection<Supply>) _localDatabaseService.GetAllSupplies(connectionString, Database).Result;
 				Items = $"{_supplies.Count} items.";
 			}
 			else
@@ -60,6 +60,7 @@ namespace RiseSync.UI.ViewModels
 			}
 		}
 
+		public RelayCommand SyncCmd { get; private set; }
 
 		private bool CanSync()
 		{
@@ -68,11 +69,11 @@ namespace RiseSync.UI.ViewModels
 
 		private void OnSync()
 		{
-			_remoteDatabaseService.SaveManySupplies(RemoteConnectionString, RemoteDatabase, _supplies);
+			var connectionString = CreateStringConnectRemoteDb(RadioBtnCheck);
+			_remoteDatabaseService.SaveManySupplies(connectionString, RemoteDatabase, _supplies);
 		}
 
 
-		
 		#endregion
 
 		#region Properties
@@ -136,13 +137,22 @@ namespace RiseSync.UI.ViewModels
 				OnPropertyChanged();
 			}
 		}
-
-		public string RemoteConnectionString
+		public string RemoteUser
 		{
-			get => _remoteDatabase.ConnectionString;
+			get => _remoteDatabase.User;
 			set
 			{
-				_remoteDatabase.ConnectionString = value;
+				_remoteDatabase.User = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public string RemotePassword
+		{
+			get => _remoteDatabase.Password;
+			set
+			{
+				_remoteDatabase.Password = value;
 				OnPropertyChanged();
 			}
 		}
@@ -157,6 +167,26 @@ namespace RiseSync.UI.ViewModels
 			}
 		}
 
+		public RemoteDbType RadioBtnCheck
+		{
+			get => _radioBtnCheck;
+			set
+			{
+				_radioBtnCheck = value;
+				OnPropertyChanged();
+			}
+		}
+
 		#endregion
+
+
+		private string CreateStringConnectRemoteDb(RemoteDbType dbType) =>
+			dbType switch
+			{
+				RemoteDbType.MongoAtlas => $"mongodb+srv://{RemoteUser}:{RemotePassword}@cluster0-cyux5.mongodb.net/{RemoteDatabase}?retryWrites=true&w=majority",
+				RemoteDbType.MLab => $"ongodb://{RemoteUser}:{RemotePassword}@ds018538.mlab.com:18538/{RemoteDatabase}",
+				RemoteDbType.MongoLocal => $"mongodb://localhost:27017/{RemoteDatabase}",
+				_ => $"mongodb://localhost:27017/{Database}"
+			};
 	}
 }
